@@ -40,7 +40,6 @@ async function solveForSecondStar (fish, days) {
   })
 
   for (let i = 0; i < days; i++) {
-
     const tempZero = school[0]
     for (let z = 0; z < 9; z++) {
       school[z] = school[z + 1]

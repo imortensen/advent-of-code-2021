@@ -11,14 +11,56 @@ async function run () {
   await solveForSecondStar(input)
 }
 
-async function solveForFirstStar (input) {
-  const solution = 'UNSOLVED'
-  report('Input:', input)
+async function solveForFirstStar (positions) {
+  const length = positions.length
+  positions.sort((a, b) => a - b)
+  const max = Math.max(...positions)
+  const options = {}
+
+  for (let i = 0; i <= max; i++) {
+    options[i] = 0
+  }
+
+  Object.keys(options).forEach(o => {
+    let sum = 0
+    positions.forEach(p => {
+      sum = sum + Math.abs(p - o)
+    })
+    options[o] = sum
+  })
+
+  const solution = Math.min(...Object.values(options))
+
+  report('Input:', length)
   report('Solution 1:', solution)
 }
 
-async function solveForSecondStar (input) {
-  const solution = 'UNSOLVED'
+async function solveForSecondStar (positions) {
+  positions.sort((a, b) => a - b)
+  const max = Math.max(...positions)
+  const options = {}
+
+  for (let i = 0; i <= max; i++) {
+    options[i] = 0
+  }
+
+  Object.keys(options).forEach(o => {
+    let sum = 0
+    positions.forEach(p => {
+      const dif = Math.abs(p - o)
+
+      let sumDif = 0
+      for (let i = 1; i < dif + 1; i++) {
+        sumDif = sumDif + i
+      }
+
+      sum = sum + sumDif
+    })
+    options[o] = sum
+  })
+
+  const solution = Math.min(...Object.values(options))
+
   report('Solution 2:', solution)
 }
 
